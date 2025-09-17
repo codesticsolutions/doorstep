@@ -1,0 +1,86 @@
+body {
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.owl-carousel {
+  direction: ltr;
+}
+
+.owl-carousel .owl-nav,
+.owl-carousel .owl-dots,
+.owl-carousel .owl-item {
+  direction: rtl;
+}
+
+.contact__input-box .bootstrap-select .dropdown-menu,
+.bootstrap-select .dropdown-toggle .filter-option {
+  text-align: right;
+}
+
+.list-unstyled {
+  padding-right: 0;
+}
+
+.tidytouch-btn__icon {
+  display: inline-flex;
+}
+
+.about-one__experience::before {
+  clip-path: polygon(100% 0, 0% 50%, 100% 100%, 100% 50%);
+}
+
+.about-one__experience::after {
+  clip-path: polygon(100% 0, 0% 50%, 100% 100%, 100% 50%);
+}
+
+.funfact__card::before {
+  clip-path: polygon(0 0, 100% 100%, 100% 0);
+}
+
+.funfact__card::after {
+  clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
+
+.video-one__video::after {
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 142.000000 162.000000">  <g transform="translate(0.000000,162.000000) scale(0.050000,-0.050000)" stroke="none"> <path d="M8 3205 c5 -19 136 -562 290 -1207 306 -1280 325 -1343 450 -1513 579 -786 1764 -575 2044 365 75 253 56 392 -198 1440 l-228 940 -1184 5 c-1122 5 -1184 3 -1174 -30z"/> </g> </svg>');
+  mask: url('data:image/svg+xml;utf8,<svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 142.000000 162.000000">  <g transform="translate(0.000000,162.000000) scale(0.050000,-0.050000)" stroke="none"> <path d="M8 3205 c5 -19 136 -562 290 -1207 306 -1280 325 -1343 450 -1513 579 -786 1764 -575 2044 365 75 253 56 392 -198 1440 l-228 940 -1184 5 c-1122 5 -1184 3 -1174 -30z"/> </g> </svg>');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: top center;
+  mask-position: top center;
+  -webkit-mask-size: auto;
+  mask-size: auto;
+}
+
+.team-card__social::before {
+  clip-path: polygon(100% 100%, 100% 0, 0 0);
+}
+
+.team-card__social::after {
+  clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
+
+.contact-one__shape__bg,
+.contact-one__shape__inner {
+  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%, 55% 50%);
+}
+
+.contact-one__shape__inner::after {
+  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%, 52% 50%);
+}
+
+.blog-card__category::after {
+  clip-path: polygon(100% 0, 0% 100%, 0% 0);
+}
+
+.main-footer__bottom__inner::before {
+  right: -29px;
+  clip-path: polygon(0% 0, 100% 100%, 0% 100%);
+}
+
+.main-footer__bottom__inner::after {
+  left: -29px;
+  clip-path: polygon(100% 0, 100% 100%, 0% 100%);
+}
+/*# sourceMappingURL=tidytouch-custom-rtl.css.map */
