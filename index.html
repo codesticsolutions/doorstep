@@ -39,6 +39,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Add in <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- template styles -->
     <link rel="stylesheet" href="assets/css/tidytouch.css" />
     <style>
@@ -567,7 +570,7 @@
                 </div><!-- /.funfact__grid -->
             </div><!-- /.container -->
         </section><!-- /.funfact section-space -->
-       <section class="services-one section-space">
+ <section class="services-one section-space">
     <div class="services-one__bg" style="background-image: url(assets/images/shapes/services-bg-shape-1.png);"></div>
     <div class="container">
         <div class="sec-title sec-title--center">
@@ -576,11 +579,14 @@
                 <h5 class="sec-title__tagline bw-split-in-up-fast">Our Best Services</h5>
                 <img src="assets/images/shapes/sec-title-shape-1-2.png" alt="Domestic Staff Services" class="sec-title__shape">
             </div>
-            <h2 class="sec-title__title bw-split-in-up">Professional <span>Domestic Staff <img src='assets/images/shapes/sec-title-shape-1-4.png' alt='shape'></span><br> For Homes & Families.</h2>
+            <h2 class="sec-title__title bw-split-in-up">
+                Professional <span>Domestic Staff <img src='assets/images/shapes/sec-title-shape-1-4.png' alt='shape'></span><br>
+                For Homes & Families.
+            </h2>
         </div>
 
-        <div class="services-one__carousel tidytouch-owl__carousel tidytouch-owl__carousel--basic-nav owl-carousel owl-theme" 
-            data-owl-options='{
+        <div class="services-one__carousel tidytouch-owl__carousel tidytouch-owl__carousel--basic-nav owl-carousel owl-theme"
+             data-owl-options='{
                 "items": 1,
                 "margin": 10,
                 "loop": true,
@@ -597,239 +603,260 @@
 
             <!-- Housemaids -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/young-beautiful-girl-apron-rubber-gloves-holding-basin-with-cleaning-tools-smiling-showing-thumbs-up.jpg" alt="Housemaids">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-housekeeping"></i></span>
+                <a href="detailhousemaids.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/young-beautiful-girl-apron-rubber-gloves-holding-basin-with-cleaning-tools-smiling-showing-thumbs-up.jpg" alt="Housemaids">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-broom"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Housemaids</h3>
+                                <p class="service-card__text">Trained housemaids for cleaning, laundry, kitchen help, and daily chores.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailhousemaids.html">Housemaids</a></h3>
-                            <p class="service-card__text">Trained housemaids for cleaning, laundry, kitchen help, and daily chores.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Babysitters / Nannies -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/mother-cute-baby-indoor-home.jpg" alt="Babysitters">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-sparkle"></i></span>
+                <a href="detailbabysister.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/mother-cute-baby-indoor-home.jpg" alt="Babysitters">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-baby"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Babysitters / Nannies</h3>
+                                <p class="service-card__text">Loving and reliable babysitters for child care, safety and daily routines.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailbabysister.html">Babysitters / Nannies</a></h3>
-                            <p class="service-card__text">Loving and reliable babysitters for child care, safety and daily routines.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Cooks / Chefs -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/portrait-handsome-bearded-man-chief-cook-holding-saucepan-make-okay-sign.jpg" alt="Cooks and Chefs">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-spray"></i></span>
+                <a href="detailchefs.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/portrait-handsome-bearded-man-chief-cook-holding-saucepan-make-okay-sign.jpg" alt="Cooks and Chefs">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-utensils"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Cooks / Chefs</h3>
+                                <p class="service-card__text">Professional cooks & chefs for Desi, Chinese, Continental and more.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailchefs.html">Cooks / Chefs</a></h3>
-                            <p class="service-card__text">Professional cooks & chefs for Desi, Chinese, Continental and more.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Drivers -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/young-handsome-man-driving-his-new-car-holding-out-keys.jpg" alt="Drivers">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-sparkle"></i></span>
+                <a href="detaildriver.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/young-handsome-man-driving-his-new-car-holding-out-keys.jpg" alt="Drivers">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-car-side"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Drivers</h3>
+                                <p class="service-card__text">Licensed, experienced drivers for safe and reliable family transport.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detaildriver.html">Drivers</a></h3>
-                            <p class="service-card__text">Licensed, experienced drivers for safe and reliable family transport.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Attendants -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/elegant-business-girl-with-notebook.jpg" alt="Attendants">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-clean-dishes"></i></span>
+                <a href="detailAttendants.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/elegant-business-girl-with-notebook.jpg" alt="Attendants">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-user-tie"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Attendants</h3>
+                                <p class="service-card__text">Personal attendants to assist with elderly care, patients and daily help.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailAttendants.html">Attendants</a></h3>
-                            <p class="service-card__text">Personal attendants to assist with elderly care, patients and daily help.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Nurses / Caregivers -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/healthcare-workers-preventing-virus-quarantine-campaign-concept-cheerful-friendly-asian-female-physician-doctor-with-clipboard-daily-checkup-standing-white-background.jpg" alt="Nurses">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-oosouji"></i></span>
+                <a href="detailnurse.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/healthcare-workers-preventing-virus-quarantine-campaign-concept-cheerful-friendly-asian-female-physician-doctor-with-clipboard-daily-checkup-standing-white-background.jpg" alt="Nurses">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-user-nurse"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Nurses / Caregivers</h3>
+                                <p class="service-card__text">Qualified nurses for medical support, patient care and elderly assistance.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailnurse.html">Nurses / Caregivers</a></h3>
-                            <p class="service-card__text">Qualified nurses for medical support, patient care and elderly assistance.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Helpers -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/happy-mature-man-receiving-package-from-courier-signing-paperwork-front-his-house.jpg" alt="Helpers">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-housekeeping"></i></span>
+                <a href="detailhelper.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/happy-mature-man-receiving-package-from-courier-signing-paperwork-front-his-house.jpg" alt="Helpers">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-hands-helping"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Helpers</h3>
+                                <p class="service-card__text">All-round helpers for dishwashing, errands, basic cooking and more.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailhelper.html">Helpers</a></h3>
-                            <p class="service-card__text">All-round helpers for dishwashing, errands, basic cooking and more.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Gatekeepers -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/portrait-male-security-guard-with-barbed-wire-fence.jpg" alt="Gatekeepers">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-security"></i></span>
+                <a href="detailgatekeeper.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/portrait-male-security-guard-with-barbed-wire-fence.jpg" alt="Gatekeepers">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-shield-halved"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Gatekeepers / Security</h3>
+                                <p class="service-card__text">Trustworthy gatekeepers for safety, visitor management and security.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailgatekeeper.html">Gatekeepers / Security</a></h3>
-                            <p class="service-card__text">Trustworthy gatekeepers for safety, visitor management and security.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Physiotherapists -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/doctor-helping-patient-rehabilitation.jpg" alt="Physiotherapists">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-sparkle"></i></span>
+                <a href="detailPhysiotherapists.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/doctor-helping-patient-rehabilitation.jpg" alt="Physiotherapists">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-dumbbell"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Physiotherapists</h3>
+                                <p class="service-card__text">Expert physiotherapists for rehabilitation and home physical therapy.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailPhysiotherapists.html">Physiotherapists</a></h3>
-                            <p class="service-card__text">Expert physiotherapists for rehabilitation and home physical therapy.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Gardeners -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/gardeners-aprons-growing-plants-greenhouse-using-hose-watering-man-apron-with-splashes-water-gardening-job-concept.jpg" alt="Gardeners">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-leaf"></i></span>
+                <a href="detailgardner.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/gardeners-aprons-growing-plants-greenhouse-using-hose-watering-man-apron-with-splashes-water-gardening-job-concept.jpg" alt="Gardeners">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-seedling"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Gardeners / Mali</h3>
+                                <p class="service-card__text">Experienced gardeners for lawn care, plant maintenance and outdoors.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailgardner.html">Gardeners / Mali</a></h3>
-                            <p class="service-card__text">Experienced gardeners for lawn care, plant maintenance and outdoors.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
             <!-- Housekeepers -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/chambermaid-preparing-hotel-room.jpg" alt="Housekeepers">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-kitchen-cleaning"></i></span>
+                <a href="detailHousekeepers.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/chambermaid-preparing-hotel-room.jpg" alt="Housekeepers">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-clipboard-list"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Housekeepers</h3>
+                                <p class="service-card__text">Supervisors to manage household staff and maintain smooth operations.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailHousekeepers.html">Housekeepers</a></h3>
-                            <p class="service-card__text">Supervisors to manage household staff and maintain smooth operations.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
-
-           
-
-           
 
             <!-- Office Boys -->
             <div class="item wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-                <div class="service-card">
-                    <div class="service-card__bg"></div>
-                    <div class="service-card__image">
-                        <img src="assets/images/services/people-lifestyle-concept-attractive-young-caucasian-male-good-mood-blue-long-sleeved-shirt-smiling-cheerfully-showing-perfect-white-teeth-happy-with-positive-news-keeping-arms-folded.jpg" alt="Office Boys">
-                        <div class="service-card__icon-box">
-                            <span class="service-card__icon"><i class="icon-sparkle"></i></span>
+                <a href="detailOfficeBoys.html" style="display:block;text-decoration:none;color:inherit;">
+                    <div class="service-card">
+                        <div class="service-card__bg"></div>
+                        <div class="service-card__image">
+                            <img src="assets/images/services/people-lifestyle-concept-attractive-young-caucasian-male-good-mood-blue-long-sleeved-shirt-smiling-cheerfully-showing-perfect-white-teeth-happy-with-positive-news-keeping-arms-folded.jpg" alt="Office Boys">
+                            <div class="service-card__icon-box">
+                                <span class="service-card__icon"><i class="fa-solid fa-briefcase"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-card__content">
+                            <div class="service-card__inner">
+                                <h3 class="service-card__title">Office Boys</h3>
+                                <p class="service-card__text">Office boys for tea, serving, errands and supporting household offices.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-card__content">
-                        <div class="service-card__inner">
-                            <h3 class="service-card__title"><a href="detailOfficeBoys.html">Office Boys</a></h3>
-                            <p class="service-card__text">Office boys for tea, serving, errands and supporting household offices.</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
         </div><!-- /.services-one__carousel -->
     </div>
 </section>
+
 
         <section class="why-choose section-space">
   <div class="container">
@@ -1531,12 +1558,20 @@
 </a>
 
 <!-- WhatsApp Icon -->
-<a href="https://wa.me/923000812876" target="_blank" 
-   style="position:fixed; bottom:160px; right:20px; background:#25D366; color:#fff; 
-   font-size:30px; padding:14px; border-radius:70%; text-align:center; 
-   box-shadow:0 4px 8px rgba(0,0,0,0.2); z-index:1000; text-decoration:none;">
-    <i class="fab fa-whatsapp"></i>
+<a href="tel:+923000812876"
+   style="position:fixed; bottom:160px; right:20px;
+          background:linear-gradient(135deg,#2585d3,#00c6ff);
+          color:#fff; font-size:30px;
+          width:60px; height:60px;
+          border-radius:20px;
+          display:flex; align-items:center; justify-content:center;
+          box-shadow:0 0 15px rgba(0,198,255,0.6);
+          text-decoration:none;
+          cursor:pointer;            
+          z-index:9999;">           
+    <i class="fas fa-phone-alt"></i>
 </a>
+
 
     <script src="assets/vendors/jquery/jquery-3.7.1.min.js"></script>
     <script src="assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
