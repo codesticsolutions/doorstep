@@ -7,6 +7,9 @@ on:
   schedule:
     - cron: "0 0 * * 0"   # also run weekly (Sunday midnight UTC)
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
