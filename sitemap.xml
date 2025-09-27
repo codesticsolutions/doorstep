@@ -10,7 +10,7 @@
     <loc>https://doorstepsupport.com/services-carousel-2.html</loc>
   </url>
   <url>
-    <loc>https://doorstepsupport.com/contact.html</loc>
+    <loc>https://doorstepsupport.com/contact</loc>
   </url>
   <url>
     <loc>https://doorstepsupport.com/detailhousemaids.html</loc>
@@ -52,12 +52,12 @@
     <loc>https://doorstepsupport.com/about/</loc>
   </url>
   <url>
+    <loc>https://doorstepsupport.com/contact.html</loc>
+  </url>
+  <url>
     <loc>https://doorstepsupport.com/about/index.html</loc>
   </url>
   <url>
     <loc>https://doorstepsupport.com/services-carousel-2</loc>
-  </url>
-  <url>
-    <loc>https://doorstepsupport.com/contact</loc>
   </url>
 </urlset>
