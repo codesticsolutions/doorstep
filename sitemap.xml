@@ -40,7 +40,7 @@
     <loc>https://doorstepsupport.com/detailgardner.html</loc>
   </url>
   <url>
-    <loc>https://doorstepsupport.com/detailHousekeepers.html</loc>
+    <loc>https://doorstepsupport.com/detailHousekeepers</loc>
   </url>
   <url>
     <loc>https://doorstepsupport.com/detailOfficeBoys.html</loc>
@@ -53,6 +53,9 @@
   </url>
   <url>
     <loc>https://doorstepsupport.com/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://doorstepsupport.com/detailHousekeepers.html</loc>
   </url>
   <url>
     <loc>https://doorstepsupport.com/about/index.html</loc>
