@@ -4,7 +4,10 @@
     <loc>https://doorstepsupport.com/</loc>
   </url>
   <url>
-    <loc>https://doorstepsupport.com/services-carousel-2.html</loc>
+    <loc>https://doorstepsupport.com/about</loc>
+  </url>
+  <url>
+    <loc>https://doorstepsupport.com/services-carousel-2</loc>
   </url>
   <url>
     <loc>https://doorstepsupport.com/contact</loc>
@@ -44,17 +47,5 @@
   </url>
   <url>
     <loc>https://doorstepsupport.com/detailOfficeBoys.html</loc>
-  </url>
-  <url>
-    <loc>https://doorstepsupport.com/about/</loc>
-  </url>
-  <url>
-    <loc>https://doorstepsupport.com/index.html</loc>
-  </url>
-  <url>
-    <loc>https://doorstepsupport.com/contact.html</loc>
-  </url>
-  <url>
-    <loc>https://doorstepsupport.com/about/index.html</loc>
   </url>
 </urlset>
