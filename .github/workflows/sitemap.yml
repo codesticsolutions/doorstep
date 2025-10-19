@@ -3,9 +3,10 @@ name: Generate Sitemap and Robots
 on:
   push:
     branches:
-      - main   # change if your default branch is different (e.g., master)
+      - main
   schedule:
-    - cron: "0 0 * * 0"   # also run weekly (Sunday midnight UTC)
+    - cron: "0 0 * * 0"   # run weekly (Sunday midnight UTC)
+  workflow_dispatch:  # allow manual trigger
 
 permissions:
   contents: write
@@ -25,19 +26,92 @@ jobs:
         run: npm install -g sitemap-generator-cli
 
       - name: Generate Sitemap
-        run: sitemap-generator https://doorstepsupport.com -o sitemap.xml
+        run: |
+          sitemap-generator https://doorstepsupport.com \
+            --filepath sitemap.xml \
+            --max-depth 10 \
+            --max-enqueue 1000 \
+            --change-freq weekly \
+            --priority-map "1.0,0.8,0.6,0.4" \
+            --last-mod \
+            --query-string \
+            --ignore-robots-txt
+
+      - name: Fix Sitemap URLs (ensure .html extensions are preserved)
+        run: |
+          # Ensure sitemap.xml exists
+          if [ ! -f sitemap.xml ]; then
+            echo "Sitemap generation failed"
+            exit 1
+          fi
+          
+          # Display generated sitemap for debugging
+          echo "Generated sitemap:"
+          cat sitemap.xml
 
       - name: Generate Robots.txt
         run: |
-          echo "User-agent: *" > robots.txt
-          echo "Allow: /" >> robots.txt
-          echo "" >> robots.txt
-          echo "Sitemap: https://doorstepsupport.com/sitemap.xml" >> robots.txt
+          cat > robots.txt << 'EOF'
+          User-agent: *
+          Allow: /
+          
+          # Disallow admin/template folders
+          Disallow: /assets/vendors/
+          
+          # Sitemap location
+          Sitemap: https://doorstepsupport.com/sitemap.xml
+          EOF
 
-      - name: Commit sitemap.xml and robots.txt
+      - name: Generate Additional SEO Files
+        run: |
+          # Create a humans.txt file
+          cat > humans.txt << 'EOF'
+          /* TEAM */
+          Website: DoorstepSupport
+          Location: Karachi, Pakistan
+          
+          /* SITE */
+          Last update: $(date +%Y/%m/%d)
+          Standards: HTML5, CSS3
+          Components: Bootstrap, jQuery
+          Software: GitHub Pages
+          EOF
+
+      - name: Commit files
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add sitemap.xml robots.txt
-          git commit -m "Update sitemap.xml and robots.txt" || echo "No changes to commit"
-          git push
+          git add sitemap.xml robots.txt humans.txt
+          git diff --staged --quiet || git commit -m "🤖 Auto-update: sitemap.xml, robots.txt, humans.txt [skip ci]"
+          git push || echo "No changes to push"
+
+      - name: Validate Sitemap
+        run: |
+          echo "Validating sitemap structure..."
+          if grep -q "https://doorstepsupport.com" sitemap.xml; then
+            echo "✅ Sitemap contains correct domain"
+          else
+            echo "❌ Sitemap domain validation failed"
+            exit 1
+          fi
+          
+          # Count URLs
+          url_count=$(grep -c "<loc>" sitemap.xml || echo "0")
+          echo "📊 Total URLs in sitemap: $url_count"
+          
+          if [ "$url_count" -lt 5 ]; then
+            echo "⚠️  Warning: Very few URLs found. Check crawling."
+          fi
+
+      - name: Summary
+        run: |
+          echo "## 🎉 Sitemap Generation Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Sitemap generated: sitemap.xml" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Robots.txt created" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Humans.txt created" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Next Steps:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Verify sitemap at: https://doorstepsupport.com/sitemap.xml" >> $GITHUB_STEP_SUMMARY
+          echo "2. Submit to Google Search Console" >> $GITHUB_STEP_SUMMARY
+          echo "3. Test with: https://www.xml-sitemaps.com/validate-xml-sitemap.html" >> $GITHUB_STEP_SUMMARY
