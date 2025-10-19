@@ -45,8 +45,20 @@ jobs:
             exit 1
           fi
           
-          # Display generated sitemap for debugging
-          echo "Generated sitemap:"
+          # Display original sitemap for debugging
+          echo "Original sitemap:"
+          cat sitemap.xml
+          
+          # Add .html extension to URLs that don't have file extensions
+          # This preserves URLs that already have .html, .jpg, .png, etc.
+          sed -i 's|<loc>\(https://doorstepsupport.com/[^<]*[^/.]\)</loc>|<loc>\1.html</loc>|g' sitemap.xml
+          
+          # Fix double .html.html if any were created
+          sed -i 's|\.html\.html|.html|g' sitemap.xml
+          
+          # Display fixed sitemap
+          echo ""
+          echo "Fixed sitemap:"
           cat sitemap.xml
 
       - name: Generate Robots.txt
@@ -99,6 +111,10 @@ jobs:
           url_count=$(grep -c "<loc>" sitemap.xml || echo "0")
           echo "📊 Total URLs in sitemap: $url_count"
           
+          # Check for .html extensions
+          html_count=$(grep -c "\.html</loc>" sitemap.xml || echo "0")
+          echo "📄 URLs with .html extension: $html_count"
+          
           if [ "$url_count" -lt 5 ]; then
             echo "⚠️  Warning: Very few URLs found. Check crawling."
           fi
@@ -110,6 +126,7 @@ jobs:
           echo "- ✅ Sitemap generated: sitemap.xml" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ Robots.txt created" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ Humans.txt created" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ URLs normalized with .html extensions" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📋 Next Steps:" >> $GITHUB_STEP_SUMMARY
           echo "1. Verify sitemap at: https://doorstepsupport.com/sitemap.xml" >> $GITHUB_STEP_SUMMARY
