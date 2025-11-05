@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
 
-# Disallow admin/template folders
-Disallow: /assets/vendors/
-
-# Sitemap location
-Sitemap: https://doorstepsupport.com/sitemap.xml
+Sitemap: https://codesticsolutions.github.io/doorstep/sitemap.xml
