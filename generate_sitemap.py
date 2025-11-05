@@ -11,7 +11,8 @@ def generate_sitemap(base_url, start_dir='.'):
     Recursively scans the directory for HTML files and generates a sitemap.xml string.
     """
     urlset = []
-    current_time = datetime.datetime.now().isoformat() + "+00:00"
+    # Use UTC for standard sitemap format
+    current_time = datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "+00:00")
 
     print(f"Scanning directory: {start_dir}")
     print(f"Using base URL: {base_url}")
@@ -35,20 +36,19 @@ def generate_sitemap(base_url, start_dir='.'):
                 if relative_path.startswith('./'):
                     relative_path = relative_path[2:]
 
-                # 2. Convert the file path to the URL path
+                # 2. Determine the canonical URL ('loc')
                 if relative_path == 'index.html':
                     # The root index file maps to the base URL
                     loc = base_url
                 else:
-                    # Construct the full URL
-                    # e.g., 'about/index.html' -> 'https://.../about/'
-                    # e.g., 'terms.html' -> 'https://.../terms.html'
                     if file == 'index.html':
-                        # For sub-directory index files, use the directory path
+                        # For sub-directory index files, use the directory path (e.g., 'blog/index.html' -> 'blog/')
                         dir_path = os.path.dirname(relative_path)
                         loc = f"{base_url}{dir_path}/"
                     else:
-                        loc = f"{base_url}{relative_path}"
+                        # FIX: Strip the .html extension to create the clean URL
+                        clean_path = relative_path.replace('.html', '')
+                        loc = f"{base_url}{clean_path}"
 
                 # Append the <url> block to the list
                 urlset.append(f"""
