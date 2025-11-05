@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://codesticsolutions.github.io/doorstep/sitemap.xml
+Sitemap: https://doorstepsupport.com/sitemap.xml
