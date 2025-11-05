@@ -3,7 +3,7 @@ import datetime
 
 # --- Configuration ---
 # The site's base URL is passed as an environment variable from the GitHub workflow.
-# Example: https://myusername.github.io/my-repo-name/
+# Since a custom domain is used, the workflow is configured to set this value.
 BASE_URL = os.environ.get('SITE_BASE_URL', 'https://localhost/')
 
 def generate_sitemap(base_url, start_dir='.'):
@@ -46,7 +46,7 @@ def generate_sitemap(base_url, start_dir='.'):
                         dir_path = os.path.dirname(relative_path)
                         loc = f"{base_url}{dir_path}/"
                     else:
-                        # FIX: Strip the .html extension to create the clean URL
+                        # Strip the .html extension to create the clean URL
                         clean_path = relative_path.replace('.html', '')
                         loc = f"{base_url}{clean_path}"
 
@@ -68,27 +68,9 @@ def generate_sitemap(base_url, start_dir='.'):
 
     return sitemap_content.strip()
 
-def create_robots_txt():
-    """
-    Generates a basic robots.txt content, allowing all access and linking to the sitemap.
-    """
-    robots_content = f"""
-User-agent: *
-Allow: /
-
-Sitemap: {BASE_URL}sitemap.xml
-"""
-    return robots_content.strip()
-
 if __name__ == "__main__":
     # Generate sitemap.xml
     sitemap_xml_content = generate_sitemap(BASE_URL)
     with open('sitemap.xml', 'w') as f:
         f.write(sitemap_xml_content)
     print("\nsitemap.xml successfully generated.")
-
-    # Generate robots.txt
-    robots_txt_content = create_robots_txt()
-    with open('robots.txt', 'w') as f:
-        f.write(robots_txt_content)
-    print("robots.txt successfully generated.")

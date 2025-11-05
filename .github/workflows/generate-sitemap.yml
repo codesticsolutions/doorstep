@@ -1,9 +1,11 @@
-name: Generate Sitemap and Robots
+name: Generate Sitemap # Changed from 'Generate Sitemap and Robots'
 
 on:
+  # Trigger the workflow on pushes to the 'main' branch
   push:
     branches:
       - main
+  # Allow manual trigger from the GitHub Actions UI
   workflow_dispatch:
 
 jobs:
@@ -12,6 +14,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        # Important: Fetch all history (depth: 0) so the commit step works correctly
         with:
           fetch-depth: 0
 
@@ -23,21 +26,26 @@ jobs:
       - name: Determine Site Base URL (Custom Domain)
         id: url_calculation
         run: |
+          # The custom domain (doorstepsupport.com) is used directly for the base URL.
           BASE_URL="https://doorstepsupport.com/"
           echo "BASE_URL=${BASE_URL}" >> $GITHUB_ENV
           echo "Site custom domain base URL set to: $BASE_URL"
 
       - name: Run Sitemap Generation Script
+        # Pass the calculated BASE_URL to the Python script as an environment variable
         run: python generate_sitemap.py
         env:
           SITE_BASE_URL: ${{ env.BASE_URL }}
 
-      - name: Commit and Push sitemap.xml and robots.txt
+      - name: Commit and Push sitemap.xml # Changed step name
+        # This action commits the generated sitemap.xml back to the current branch (main)
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'sitemap.xml robots.txt'
-          message: 'Automated: Generate sitemap.xml and robots.txt'
+          add: 'sitemap.xml' # Changed to only add sitemap.xml
+          message: 'Automated: Generate sitemap.xml' # Changed commit message
+          # Use the GITHUB_TOKEN for authentication
           token: ${{ github.token }}
+          # Set the committer and author information
           committer_name: Github Actions Bot
           committer_email: actions@github.com
           author_name: Github Actions Bot
