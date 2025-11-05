@@ -1,26 +1,24 @@
-name: Generate Sitemap and Robots
-
+name: Generate Sitemap
 on:
   push:
     branches:
       - main
-  schedule:
-    - cron: "0 0 * * 0"   # run weekly (Sunday midnight UTC)
-  workflow_dispatch:  # allow manual trigger
+  workflow_dispatch:      # Keep manual trigger for testing
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  generate-sitemap:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install Sitemap Generator
         run: npm install -g sitemap-generator-cli
@@ -32,33 +30,22 @@ jobs:
             --max-depth 10 \
             --max-enqueue 1000 \
             --change-freq weekly \
-            --priority-map "1.0,0.8,0.6,0.4" \
-            --last-mod \
-            --query-string \
+            --priority 0.8 \
             --ignore-robots-txt
-
-      - name: Fix Sitemap URLs (ensure .html extensions are preserved)
-        run: |
-          # Ensure sitemap.xml exists
+          
+          # Validation check
           if [ ! -f sitemap.xml ]; then
             echo "Sitemap generation failed"
             exit 1
           fi
           
-          # Display original sitemap for debugging
-          echo "Original sitemap:"
-          cat sitemap.xml
-          
-          # Add .html extension to URLs that don't have file extensions
-          # This preserves URLs that already have .html, .jpg, .png, etc.
+          # Add .html extensions to URLs
           sed -i 's|<loc>\(https://doorstepsupport.com/[^<]*[^/.]\)</loc>|<loc>\1.html</loc>|g' sitemap.xml
           
-          # Fix double .html.html if any were created
+          # Fix any double .html extensions
           sed -i 's|\.html\.html|.html|g' sitemap.xml
           
-          # Display fixed sitemap
-          echo ""
-          echo "Fixed sitemap:"
+          echo "Generated sitemap content:"
           cat sitemap.xml
 
       - name: Generate Robots.txt
@@ -66,69 +53,66 @@ jobs:
           cat > robots.txt << 'EOF'
           User-agent: *
           Allow: /
-          
+
           # Disallow admin/template folders
           Disallow: /assets/vendors/
-          
+
           # Sitemap location
           Sitemap: https://doorstepsupport.com/sitemap.xml
           EOF
 
-      - name: Generate Additional SEO Files
+      - name: Validate Generated Files
         run: |
-          # Create a humans.txt file
-          cat > humans.txt << 'EOF'
-          /* TEAM */
-          Website: DoorstepSupport
-          Location: Karachi, Pakistan
-          
-          /* SITE */
-          Last update: $(date +%Y/%m/%d)
-          Standards: HTML5, CSS3
-          Components: Bootstrap, jQuery
-          Software: GitHub Pages
-          EOF
+          # Check sitemap exists and has content
+          if [ ! -s sitemap.xml ]; then
+            echo "Error: sitemap.xml is empty or missing"
+            exit 1
+          fi
+
+          # Check robots.txt exists and has content
+          if [ ! -s robots.txt ]; then
+            echo "Error: robots.txt is empty or missing"
+            exit 1
+          fi
+
+          # Count URLs in sitemap
+          url_count=$(grep -c "<loc>" sitemap.xml || echo "0")
+          echo "Found $url_count URLs in sitemap"
+
+          # Verify all HTML pages have .html extension
+          html_pages=$(grep "<loc>" sitemap.xml | grep -v "\.\(jpg\|png\|gif\|css\|js\)") 
+          if echo "$html_pages" | grep -q "[^.]</loc>"; then
+            echo "Error: Found URLs without .html extension"
+            echo "$html_pages"
+            exit 1
+          fi
 
       - name: Commit files
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add sitemap.xml robots.txt humans.txt
-          git diff --staged --quiet || git commit -m "🤖 Auto-update: sitemap.xml, robots.txt, humans.txt [skip ci]"
-          git push || echo "No changes to push"
-
-      - name: Validate Sitemap
-        run: |
-          echo "Validating sitemap structure..."
-          if grep -q "https://doorstepsupport.com" sitemap.xml; then
-            echo "✅ Sitemap contains correct domain"
+          git add sitemap.xml robots.txt
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
           else
-            echo "❌ Sitemap domain validation failed"
-            exit 1
-          fi
-          
-          # Count URLs
-          url_count=$(grep -c "<loc>" sitemap.xml || echo "0")
-          echo "📊 Total URLs in sitemap: $url_count"
-          
-          # Check for .html extensions
-          html_count=$(grep -c "\.html</loc>" sitemap.xml || echo "0")
-          echo "📄 URLs with .html extension: $html_count"
-          
-          if [ "$url_count" -lt 5 ]; then
-            echo "⚠️  Warning: Very few URLs found. Check crawling."
+            git commit -m "🤖 Auto-update: sitemap.xml and robots.txt [skip ci]"
+            git push
           fi
 
       - name: Summary
         run: |
           echo "## 🎉 Sitemap Generation Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Sitemap generated: sitemap.xml" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Robots.txt created" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Humans.txt created" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ URLs normalized with .html extensions" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "- Total URLs: $(grep -c "<loc>" sitemap.xml || echo '0')" >> $GITHUB_STEP_SUMMARY
+          echo "- HTML Pages: $(grep "<loc>" sitemap.xml | grep -c "\.html" || echo '0')" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📋 Next Steps:" >> $GITHUB_STEP_SUMMARY
-          echo "1. Verify sitemap at: https://doorstepsupport.com/sitemap.xml" >> $GITHUB_STEP_SUMMARY
-          echo "2. Submit to Google Search Console" >> $GITHUB_STEP_SUMMARY
-          echo "3. Test with: https://www.xml-sitemaps.com/validate-xml-sitemap.html" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Generated Files" >> $GITHUB_STEP_SUMMARY
+          echo "- sitemap.xml (with .html extensions)" >> $GITHUB_STEP_SUMMARY
+          echo "- robots.txt (with vendor exclusions)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Next Steps" >> $GITHUB_STEP_SUMMARY
+          echo "1. Verify sitemap at https://doorstepsupport.com/sitemap.xml" >> $GITHUB_STEP_SUMMARY
+          echo "2. Submit sitemap in Google Search Console" >> $GITHUB_STEP_SUMMARY
