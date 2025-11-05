@@ -1,0 +1,56 @@
+name: Generate Sitemap and Robots
+
+on:
+  # Trigger the workflow on pushes to the 'main' branch
+  push:
+    branches:
+      - main
+  # Allow manual trigger from the GitHub Actions UI
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        # Important: Fetch all history (depth: 0) so the commit step works correctly
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Determine Site Base URL
+        # We determine the base URL based on the repository name (Project Pages)
+        # Format: https://<username>.github.io/<repo-name>/
+        # Example: https://gemini-user.github.io/my-awesome-site/
+        id: url_calculation
+        run: |
+          REPO_NAME=$(echo ${{ github.repository }} | awk -F/ '{print $2}')
+          OWNER_NAME=${{ github.event.repository.owner.login }}
+          BASE_URL="https://${OWNER_NAME}.github.io/${REPO_NAME}/"
+          echo "BASE_URL=${BASE_URL}" >> $GITHUB_ENV
+          echo "Site base URL determined: $BASE_URL"
+
+      - name: Run Sitemap Generation Script
+        # Pass the calculated BASE_URL to the Python script as an environment variable
+        run: python generate_sitemap.py
+        env:
+          SITE_BASE_URL: ${{ env.BASE_URL }}
+
+      - name: Commit and Push sitemap.xml and robots.txt
+        # This action commits the generated files back to the current branch (main)
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'sitemap.xml robots.txt'
+          message: 'Automated: Generate sitemap.xml and robots.txt'
+          # Use the GITHUB_TOKEN for authentication
+          token: ${{ github.token }} 
+          # Set the committer and author information
+          committer_name: Github Actions Bot
+          committer_email: actions@github.com
+          author_name: Github Actions Bot
+          author_email: actions@github.com
