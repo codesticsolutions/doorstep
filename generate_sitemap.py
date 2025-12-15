@@ -9,6 +9,7 @@ BASE_URL = os.environ.get('SITE_BASE_URL', 'https://localhost/')
 def generate_sitemap(base_url, start_dir='.'):
     """
     Recursively scans the directory for HTML files and generates a sitemap.xml string.
+    Only includes files deemed relevant for SEO (i.e., excluding assets and utility files).
     """
     urlset = []
     # Use UTC for standard sitemap format
@@ -21,22 +22,40 @@ def generate_sitemap(base_url, start_dir='.'):
     if not base_url.endswith('/'):
         base_url += '/'
 
+    # Directories to explicitly exclude from the sitemap generation process,
+    # as they contain non-indexable assets or build configurations.
+    EXCLUDE_DIRS = ['.git', '.github', 'assets', '_posts'] # Assets and config/utility folders
+
     # Iterate through all files and directories starting from start_dir
-    for root, _, files in os.walk(start_dir):
-        # Skip the .git directory and the workflow directory
-        if '.git' in root or '.github' in root:
+    for root, dirs, files in os.walk(start_dir):
+        # 1. Directory Exclusion Check
+        # Modify the 'dirs' list in place to skip traversing unwanted subdirectories
+        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
+
+        # Skip the root directory itself if it's one of the excluded paths (e.g., if you run this from within 'assets')
+        if any(excluded_dir in root.split(os.path.sep) for excluded_dir in EXCLUDE_DIRS):
             continue
 
         for file in files:
             if file.endswith('.html'):
-                # 1. Determine the path relative to the repository root
+                # 2. Determine the path relative to the repository root
                 relative_path = os.path.join(root, file).replace('\\', '/')
+
+                # Exclude paths that contain '@@' (like the previous temporary/error link)
+                if '@@' in relative_path:
+                    print(f"Skipping temporary/error link: {relative_path}")
+                    continue
+                
+                # Exclude common utility/error files that shouldn't be indexed
+                if file in ['404.html', 'robots.txt.html']: 
+                    print(f"Skipping known utility file: {relative_path}")
+                    continue
 
                 # Remove the initial './' if present
                 if relative_path.startswith('./'):
                     relative_path = relative_path[2:]
 
-                # 2. Determine the canonical URL ('loc')
+                # 3. Determine the canonical URL ('loc')
                 if relative_path == 'index.html':
                     # The root index file maps to the base URL
                     loc = base_url
