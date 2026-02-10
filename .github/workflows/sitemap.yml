@@ -5,10 +5,15 @@ on:
     branches:
       - main
 
+# Prevent simultaneous deployments from conflicting
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 permissions:
   contents: write
-  pages: write # Required for deployment
-  id-token: write # Required for deployment
+  pages: write #
+  id-token: write #
 
 jobs:
   sitemap_job:
@@ -35,15 +40,14 @@ jobs:
           git commit -m "Automated sitemap update" || exit 0
           git push
 
-      # --- NEW DEPLOYMENT STEPS ---
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "." # Deploy the entire root directory
+          path: "." # Uploads your root directory
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4 # This is Step 8 where it previously failed
