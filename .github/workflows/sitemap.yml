@@ -1,0 +1,35 @@
+name: Generate Sitemap
+
+on:
+  push:
+    branches:
+      - main  # Make sure this matches your branch name (main or master)
+
+jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Crucial: allows GitHub to save the sitemap back to your repo
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Generate the sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://doorstepsupport.com/
+          path-to-root: .
+          # Ignores CSS/JS/Images but keeps your actual pages
+          exclude-files: assets/ 404.html
+          # Ensures these specific folders are scanned first
+          additional-path-prefixes: blog/ services/
+
+      - name: Commit and push sitemap
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git commit -m "Automated sitemap update" || exit 0
+          git push
