@@ -5,15 +5,14 @@ on:
     branches:
       - main
 
-# Prevent simultaneous deployments from conflicting
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 permissions:
   contents: write
-  pages: write #
-  id-token: write #
+  pages: write
+  id-token: write
 
 jobs:
   sitemap_job:
@@ -31,6 +30,7 @@ jobs:
           path-to-root: .
           exclude-files: assets/ 404.html
           additional-path-prefixes: blog/ services/
+          drop-html-extension: true
 
       - name: Commit and push sitemap
         run: |
@@ -46,8 +46,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "." # Uploads your root directory
+          path: "."
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 # This is Step 8 where it previously failed
+        uses: actions/deploy-pages@v4
