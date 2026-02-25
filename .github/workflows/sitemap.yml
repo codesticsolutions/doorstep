@@ -28,7 +28,8 @@ jobs:
         with:
           base-url-path: https://doorstepsupport.com/
           path-to-root: .
-          exclude-files: >
+          # Corrected parameter name: path-exclude
+          path-exclude: >
             assets/**
             vendors/**
             404.html
