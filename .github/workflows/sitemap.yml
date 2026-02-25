@@ -28,7 +28,18 @@ jobs:
         with:
           base-url-path: https://doorstepsupport.com/
           path-to-root: .
-          exclude-files: "assets/**" "vendors/**" "404.html" "@@link.html" "blog/blog-details.html" ".github/**" ".git/**" "*.js" "*.css" "*.png" "*.jpg"
+          exclude-files: >
+            assets/**
+            vendors/**
+            404.html
+            @@link.html
+            blog/blog-details.html
+            .github/**
+            .git/**
+            *.js
+            *.css
+            *.png
+            *.jpg
           additional-path-prefixes: services/ blog/
           drop-html-extension: true
 
