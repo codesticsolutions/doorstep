@@ -28,8 +28,8 @@ jobs:
         with:
           base-url-path: https://doorstepsupport.com/
           path-to-root: .
-          exclude-files: assets/ 404.html
-          additional-path-prefixes: blog/ services/
+          exclude-files: assets/ 404.html @@link.html vendors/ .github/ .git/ *.js *.css
+          additional-path-prefixes: services/ blog/
           drop-html-extension: true
 
       - name: Commit and push sitemap
