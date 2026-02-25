@@ -28,7 +28,6 @@ jobs:
         with:
           base-url-path: https://doorstepsupport.com/
           path-to-root: .
-          # CORRECTED: Use exclude-paths instead of path-exclude
           exclude-paths: |
             assets/**
             vendors/**
@@ -43,7 +42,6 @@ jobs:
             *.css
             *.png
             *.jpg
-          additional-path-prefixes: services/ blog/
           drop-html-extension: true
 
       - name: Commit and push sitemap
