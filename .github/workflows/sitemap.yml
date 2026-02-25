@@ -28,9 +28,12 @@ jobs:
         with:
           base-url-path: https://doorstepsupport.com/
           path-to-root: .
-          path-exclude: |
+          # CORRECTED: Use exclude-paths instead of path-exclude
+          exclude-paths: |
             assets/**
             vendors/**
+            **/*.min.html
+            **/jquery-*.min.html
             404.html
             @@link.html
             blog/blog-details.html
